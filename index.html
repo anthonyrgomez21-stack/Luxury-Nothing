@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,22 +149,30 @@
 
     /* MOBILE */
     @media (max-width: 640px) {
-      header {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .counter {
-        border-left: none;
-        padding-left: 0;
-      }
-      .hero h2 {
-        font-size: 42px;
-      }
-      .buy {
-        font-size: 16px;
-        padding: 14px;
-      }
-    }
+  header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  header h1 {
+    font-size: 36px;
+  }
+
+  .counter {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .hero h2 {
+    font-size: 42px;
+  }
+
+  .buy {
+    font-size: 16px;
+    padding: 14px;
+  }
+}
+
 
     /* SECRET ADMIN */
     #adminDot {
@@ -292,7 +300,7 @@
 </div>
 
 <script>
-  const PASS = "jestnic"; // CHANGE THIS
+  const PASS = "jestnic"; 
   const KEY = "luxuryNothingCounters";
   const DEFAULT = { buyers: 6, spent: 14 };
 

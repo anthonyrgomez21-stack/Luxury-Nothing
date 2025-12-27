@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Luxury Nothing — A Contemporary Exhibition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f6f6f4;
+      --text: #111111;
+      --muted: #6e6e6e;
+      --line: #dddddd;
+      --accent: #2b2b2b;
+
+      --serif: "Playfair Display", serif;
+      --sans: "Inter", system-ui, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 48px 24px 120px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 96px;
+    }
+
+    header h1 {
+      font-family: var(--serif);
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .counter {
+      border-left: 1px solid var(--line);
+      padding-left: 24px;
+    }
+
+    .counter-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .counter-value {
+      font-family: var(--mono);
+      font-size: 20px;
+      margin-top: 6px;
+    }
+
+    .hero {
+      max-width: 720px;
+      margin-bottom: 120px;
+    }
+
+    .hero h2 {
+      font-family: var(--serif);
+      font-size: 64px;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 36px;
+      margin-bottom: 48px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 48px;
+    }
+
+    .product {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    .price {
+      font-family: var(--mono);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .product h3 {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .product p {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .buy {
+      background: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 12px 20px;
+      font-size: 15px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .buy:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    footer {
+      margin-top: 160px;
+      padding-top: 48px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 640px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 640px) {
+      header {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .counter {
+        border-left: none;
+        padding-left: 0;
+      }
+      .hero h2 {
+        font-size: 42px;
+      }
+      .buy {
+        font-size: 16px;
+        padding: 14px;
+      }
+    }
+
+    /* SECRET ADMIN */
+    #adminDot {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      background: transparent;
+      opacity: 0.2;
+      z-index: 9999;
+    }
+
+    #adminModal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      z-index: 10000;
+      padding: 16px;
+    }
+
+    #adminBox {
+      background: white;
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      font-family: var(--sans);
+    }
+
+    #adminBox input, #adminBox button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      font-family: var(--mono);
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Luxury Nothing</h1>
+  <div class="counter">
+    <div class="counter-label">Participants</div>
+    <div class="counter-value" id="buyers"></div>
+  </div>
+  <div class="counter">
+    <div class="counter-label">Total Spent</div>
+    <div class="counter-value" id="spent"></div>
+  </div>
+</header>
+
+<section class="hero">
+  <h2>The Art of Owning Nothing</h2>
+  <p>
+    Luxury Nothing is a conceptual exhibition exploring value, desire,
+    and the quiet confidence of buying absolutely nothing.
+  </p>
+</section>
+
+<section>
+  <div class="section-title">The Collection</div>
+
+  <div class="products">
+
+    <!-- PRODUCTS -->
+    <div class="product"><div class="price">$1</div><h3>Nothing</h3><p>The original work.</p>
+      <a href="https://c59e9718-101a-4165-9521-774ad9d8ee4f.paylinks.godaddy.com/nothing" target="_blank"><button class="buy">Acquire</button></a>
+    </div>
+
+    <div class="product"><div class="price">$5</div><h3>Penta-Nothing</h3><p>A denser absence.</p>
+      <a href="https://c59e9718-101a-4165-9521-774ad9d8ee4f.paylinks.godaddy.com/penta-nothing" target="_blank"><button class="buy">Acquire</button></a>
+    </div>
+
+    <div class="product"><div class="price">$10</div><h3>Ben Nothing</h3><p>A measured void.</p>
+      <a href="https://c59e9718-101a-4165-9521-774ad9d8ee4f.paylinks.godaddy.com/ben-nothing" target="_blank"><button class="buy">Acquire</button></a>
+    </div>
+
+    <div class="product"><div class="price">$20</div><h3>Pocket of Nothing</h3><p>Portable emptiness.</p>
+      <a href="https://c59e9718-101a-4165-9521-774ad9d8ee4f.paylinks.godaddy.com/pocket-of-nothing" target="_blank"><button class="buy">Acquire</button></a>
+    </div>
+
+    <div class="product"><div class="price">$100</div><h3>The Most Desired Nothing</h3><p>The definitive absence.</p>
+      <a href="https://c59e9718-101a-4165-9521-774ad9d8ee4f.paylinks.godaddy.com/the-most-desired-nothing" target="_blank"><button class="buy">Acquire</button></a>
+    </div>
+
+    <div class="product"><div class="price">Custom</div><h3>What’s Your Price of Nothing?</h3><p>Choose your value.</p>
+      <a href="https://c59e9718-101a-4165-9521-774ad9d8ee4f.paylinks.godaddy.com/your-price-of-nothing" target="_blank"><button class="buy">Acquire</button></a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>Luxury Nothing is a conceptual artwork.</p>
+  <p>
+    Contact:
+    <span id="emailCopy" style="cursor:pointer;text-decoration:underline;">
+      luxurynothingshop@gmail.com
+    </span>
+  </p>
+  <p>© <span id="year"></span> Luxury Nothing™ · All rights reserved (to nothing).</p>
+</footer>
+
+</div>
+
+<!-- SECRET ADMIN -->
+<button id="adminDot"></button>
+
+<div id="adminModal">
+  <div id="adminBox">
+    <div style="font-family:var(--serif);font-size:22px;">Settings</div>
+    <input type="password" id="adminCode" placeholder="Code">
+    <input type="number" id="adminBuyers" placeholder="Participants">
+    <input type="number" id="adminSpent" placeholder="Total Spent">
+    <button id="adminSave">Save</button>
+  </div>
+</div>
+
+<script>
+  const PASS = "jestnic"; // CHANGE THIS
+  const KEY = "luxuryNothingCounters";
+  const DEFAULT = { buyers: 6, spent: 14 };
+
+  const buyersEl = document.getElementById("buyers");
+  const spentEl = document.getElementById("spent");
+
+  function load() {
+    return JSON.parse(localStorage.getItem(KEY)) || DEFAULT;
+  }
+  function save(v) {
+    localStorage.setItem(KEY, JSON.stringify(v));
+    buyersEl.textContent = v.buyers;
+    spentEl.textContent = "$" + v.spent;
+  }
+
+  save(load());
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  document.getElementById("emailCopy").onclick = () => {
+    navigator.clipboard.writeText("luxurynothingshop@gmail.com");
+  };
+
+  const modal = document.getElementById("adminModal");
+  document.getElementById("adminDot").onclick = () => modal.style.display = "flex";
+
+  document.getElementById("adminSave").onclick = () => {
+    if (document.getElementById("adminCode").value !== PASS) return;
+    save({
+      buyers: Number(adminBuyers.value),
+      spent: Number(adminSpent.value)
+    });
+    modal.style.display = "none";
+  };
+</script>
+
+</body>
+</html>
